@@ -1,32 +1,41 @@
 from gpiozero import LightSensor, Buzzer, Button
 from picamera import PiCamera
 from time import sleep
+from math import fabs
 
 def takePic():
+    import car
     print("ZA WARUDO")
     global environment
-    global e
     global camera
     # checking if the light is sufficient to take a picture
-    if environment.value > e:
-        camera.start_preview()
-        sleep(2)
-        camera.capture('/home/pi/Desktop/catpic.jpg')
-        camera.stop_preview()
-    import sendingMail
+    #if environment.value > e:
+##        camera.start_preview()
+##        sleep(2)
+##        camera.capture('/home/pi/Desktop/catpic.jpg')
+##        camera.stop_preview()
+   # import sendingMail
     # TODO car movement
 
 
-button = Button(2)
-camera = PiCamera()
-camera.rotation = 180
-environment = LightSensor(4)
-e = 0.9
+#button = Button(18)
+##camera = PiCamera()
+##camera.rotation = 180
+ldr = LightSensor(17)
+print("Hello")
+previousValue = ldr.value
+print(ldr.value)
 
 #connecting a pushbutton to the taking of picture
-button.when_pressed = takePic
+#button.when_pressed = takePic
 
-# TODO detect movement
+while True:
+    currentValue = ldr.value
+    if fabs( currentValue - previousValue ) > 0.0145:
+        takePic()
+    previousValue = currentValue
+    sleep(0.1)
+
 
 
 
