@@ -3,10 +3,27 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
+import base64
+import xml.etree.ElementTree as ET
 
-# TODO read email and passwors from configuration
-email_user = ''
-password = ''
+def decode(enc , key):
+    dec = []
+    enc = base64.urlsafe_b64decode(enc).decode()
+    for i in range(len(enc)):
+        key_c = key[i % len(key)]
+        dec_c = chr((256 + ord(enc[i]) - ord(key_c)) % 256)
+        dec.append(dec_c)
+    return "".join(dec)
+
+
+tree = ET.parse('config.xml')
+root = tree.getroot()
+
+print(root.find('email').text)
+password = root.find('password').text
+
+email_user = root.find('email').text
+password = decode(password,"malincoh")
 subject = 'Test email'
 msg = MIMEMultipart()
 msg['From'] = email_user
