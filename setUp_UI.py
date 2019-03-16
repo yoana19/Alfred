@@ -25,7 +25,7 @@ def saveConfig():
     tree.write('config.xml')
 
 def runAlfred():
-    import sendingMail
+    import CameraLight
 
 
 

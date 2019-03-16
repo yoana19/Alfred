@@ -33,7 +33,7 @@ msg['Subject'] = subject
 body = "Hi, there"
 msg.attach(MIMEText(body,'plain'))
 
-filename = "test.png"
+filename = "catpic.jpg"
 attachment = open(filename, 'rb')
 
 part = MIMEBase('application', 'octet-stream')
