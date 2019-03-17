@@ -25,7 +25,7 @@ def saveConfig():
     tree.write('config.xml')
 
 def runAlfred():
-    import CameraLight
+    import Alfred
 
 
 
@@ -44,7 +44,7 @@ root = Tk()
 
 root.title("Alfred")
 
-				
+                
 
 emailLabel = Label(root, text = "User e-mail")
 emailLabel.grid(column=0, row=0)
@@ -56,7 +56,7 @@ passwordEntry = Entry(root, show="*", bd = 10)
 passwordEntry.grid(column=1, row=1)
 
 saveButton = Button(root, text="Save configuration",command=saveConfig )
-runButton = Button(root, text="Run Alfred",command=runAlfred )
+runButton = Button(root, text="Run, Alfred, Run",command=runAlfred )
 saveButton.grid(column=1, row=2)
 runButton.grid(column=1, row=3)
 
